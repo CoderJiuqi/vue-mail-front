@@ -31,7 +31,7 @@
         <icon-svg icon-class="reload4" />
       </el-button>
 
-      <el-dropdown
+      <!-- <el-dropdown
         @command="handleMark"
         split-button
         type="primary"
@@ -56,7 +56,7 @@
             }}</el-dropdown-item
           >
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
       <el-input
         @keyup.enter.native="handleFilter"
         style="width: 300px"
@@ -150,9 +150,9 @@
           <span class="link-type" @click="goToDetail(scope.row.id)">{{
             scope.row.title
           }}</span>
-          <el-tag v-for="label in scope.row.labelList" :key="label.guid">{{
+          <!-- <el-tag v-for="label in scope.row.labelList" :key="label.guid">{{
             label.name
-          }}</el-tag>
+          }}</el-tag> -->
         </template>
       </el-table-column>
 

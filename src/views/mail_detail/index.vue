@@ -32,7 +32,7 @@
           <icon-svg icon-class="reload4"/>
         </el-button>
       </el-button-group>
-      <el-dropdown
+      <!-- <el-dropdown
         @command="handleMark"
         split-button
         type="primary"
@@ -48,7 +48,7 @@
             {{label.name}}
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
       <el-dropdown split-button type="primary" size="small" menu-align="start">附件
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="file in mail.oldFileList" :key="file.name">
@@ -57,14 +57,14 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-dropdown split-button type="primary" size="small" menu-align="start">录音
+      <!-- <el-dropdown split-button type="primary" size="small" menu-align="start">录音
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="audio in mail.oldAudioList" :key="audio.name">
             <icon-svg icon-class="voice4" class="download-icon"/>
             <a :href="audio.url" download>{{audio.name}}</a>
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
     </el-row>
     <div class="mail-info">
       <div class="title-info">
@@ -74,7 +74,7 @@
           @click="toggleStar()"
           v-bind:class="[mail.isStar? 'fa-star':'fa-star-o']"
         ></i>
-        <el-tag
+        <!-- <el-tag
           v-for="(label, index) in mail.labelList"
           :key="label.id"
           :closable="true"
@@ -82,7 +82,7 @@
           :close-transition="false"
           @close="delLabel(index)"
           class="label-item"
-        >{{label.name}}</el-tag>
+        >{{label.name}}</el-tag> -->
       </div>
       <div>
         <el-tag type="primary" class="info-tag">发件人</el-tag>
@@ -104,7 +104,7 @@
           </span>
         </el-col>
       </el-row>
-      <el-row>
+      <!-- <el-row>
         <el-col :span="1">
           <el-tag type="primary">抄送&nbsp;&nbsp;&nbsp;&nbsp;</el-tag>
         </el-col>
@@ -114,7 +114,7 @@
             <{{item.mail}}>;
           </span>
         </el-col>
-      </el-row>
+      </el-row> -->
     </div>
     <div class="mail-content" v-html="mail.content"></div>
   </div>

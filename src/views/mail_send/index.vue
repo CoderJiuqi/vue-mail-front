@@ -288,9 +288,7 @@ export default {
         uuid: fileInfo.uid,
         url: fileInfo.url
       });
-      // this.mail.title = _findLastPint(fileInfo.name);
-      var str = fileInfo.name
-      this.mail.title = str.substr(0, str.lastIndexOf('.'));
+      this.mail.title = fileInfo.name;
     },
     handlePreview(file) {
       // 预览,一些文件因为格式问题无法预览。推荐使用a标签，src为文件的下载地址，点击即可下载,参照录音
