@@ -10,7 +10,7 @@ const authRedirect = () =>
     import('../views/login/authredirect');
 const sendPWD = () =>
     import('../views/login/sendpwd');
-const reset = () =>
+const reset = () => 
     import('../views/login/reset');
 
 /* dashboard */
@@ -93,7 +93,7 @@ export const constantRouterMap = [
         redirect: '/mail_send/index',
         icon: 'edit2',
         noDropdown: true,
-        children: [{ path: 'index', component: MailSend, name: '写信' }]
+        children: [{ path: 'index', component: MailSend, name: '交换文件' }]
     },
     {
         path: '/inbox',
@@ -109,16 +109,16 @@ export const constantRouterMap = [
         redirect: '/outbox/index',
         icon: 'outbox',
         noDropdown: true,
-        children: [{ path: 'index', component: Outbox, name: '发件箱' }]
+        children: [{ path: 'index', component: Outbox, name: '交换箱' }]
     },
-    {
-        path: '/draftbox',
-        component: Layout,
-        redirct: '/draftbox/index',
-        icon: 'edit3',
-        noDropdown: true,
-        children: [{ path: 'index', component: DraftBox, name: '草稿箱' }]
-    },
+    // {
+    //     path: '/draftbox',
+    //     component: Layout,
+    //     redirct: '/draftbox/index',
+    //     icon: 'edit3',
+    //     noDropdown: true,
+    //     children: [{ path: 'index', component: DraftBox, name: '草稿箱' }]
+    // },
     {
         path: '/mail_list',
         component: Layout,
@@ -167,47 +167,47 @@ export default new Router({
 
 // 异步挂载的路由,动态需要根据权限加载的路由表
 export const asyncRouterMap = [
-    {
-        path: '',
-        component: Layout,
-        redirect: 'noredirect',
-        name: '邮件标签',
-        icon: 'label7',
-        children: [{ path: 'mail_label/index', component: MailLabel, name: '标签管理' }]
-    },
-    {
-        path: '',
-        component: Layout,
-        redirect: 'noredirect',
-        name: '通讯录',
-        icon: 'contact5',
-        children: [
-            { path: 'mail_contacts/group', component: MailGroup, name: '分组管理' },
-            { path: 'mail_contacts/index', component: ContactList, name: '所有联系人' }
-        ]
-    },
-    {
-        path: '/errorpage',
-        component: Layout,
-        redirect: 'noredirect',
-        name: '错误页面',
-        icon: 'warn1',
-        children: [
-            { path: '401', component: Err401, name: '401' },
-            { path: '404', component: Err404, name: '404' }
-        ]
-    },
-    {
-        path: '/errlog',
-        component: Layout,
-        redirect: 'noredirect',
-        name: 'errlog',
-        icon: 'bug',
-        hidden: true,
-        noDropdown: true,
-        children: [{ path: 'log', component: ErrorLog, name: '错误日志' }]
-    },
-    { path: '*', redirect: '/404', hidden: true }
+    // {
+    //     path: '',
+    //     component: Layout,
+    //     redirect: 'noredirect',
+    //     name: '邮件标签',
+    //     icon: 'label7',
+    //     children: [{ path: 'mail_label/index', component: MailLabel, name: '标签管理' }]
+    // },
+    // {
+    //     path: '',
+    //     component: Layout,
+    //     redirect: 'noredirect',
+    //     name: '通讯录',
+    //     icon: 'contact5',
+    //     children: [
+    //         { path: 'mail_contacts/group', component: MailGroup, name: '分组管理' },
+    //         { path: 'mail_contacts/index', component: ContactList, name: '所有联系人' }
+    //     ]
+    // },
+    // {
+    //     path: '/errorpage',
+    //     component: Layout,
+    //     redirect: 'noredirect',
+    //     name: '错误页面',
+    //     icon: 'warn1',
+    //     children: [
+    //         { path: '401', component: Err401, name: '401' },
+    //         { path: '404', component: Err404, name: '404' }
+    //     ]
+    // },
+    // {
+    //     path: '/errlog',
+    //     component: Layout,
+    //     redirect: 'noredirect',
+    //     name: 'errlog',
+    //     icon: 'bug',
+    //     hidden: true,
+    //     noDropdown: true,
+    //     children: [{ path: 'log', component: ErrorLog, name: '错误日志' }]
+    // },
+    // { path: '*', redirect: '/404', hidden: true }
 
 ];
 
