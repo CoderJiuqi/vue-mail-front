@@ -85,7 +85,7 @@
         >{{label.name}}</el-tag> -->
       </div>
       <div>
-        <el-tag type="primary" class="info-tag">发件人</el-tag>
+        <el-tag type="primary" class="info-tag">发送单位</el-tag>
         <span class="send-name">{{mail.sender}}</span>
         <{{mail.sendMail}}>;
       </div>
@@ -95,7 +95,7 @@
       </div>
       <el-row>
         <el-col :span="1">
-          <el-tag type="primary">收件人</el-tag>
+          <el-tag type="primary">接收单位</el-tag>
         </el-col>
         <el-col :span="22">
           <span v-for="item in mail.target" :key="item.mail" class="target-item">
