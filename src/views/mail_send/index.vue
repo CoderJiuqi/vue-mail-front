@@ -1,12 +1,12 @@
 <template>
   <div v-loading.body="loading" class="app-container calendar-list-container">
     <el-row :gutter="10">
-      <el-col :span="2">
-        <el-tag class="target-label" color="#36c6d3">收件人
+      <el-col :span="3">
+        <el-tag class="target-label" color="#36c6d3">目标单位地址
           <icon-svg icon-class="add-user4" class="add-user"/>
         </el-tag>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="18">
         <multiselect
           v-model="target"
           :options="contacts"
@@ -15,12 +15,12 @@
           @tag="addContact"
           :clear-on-select="false"
           :hide-target="true"
-          placeholder="请选择或输入联系人"
+          placeholder="请选择或输入目标单位地址"
           label="show"
           track-by="mail"
         ></multiselect>
       </el-col>
-      <el-col :span="2">
+      <el-col :span="3">
         <el-button type="danger" @click="cleanTarget">清空</el-button>
       </el-col>
     </el-row>
@@ -49,15 +49,15 @@
       </el-col>
     </el-row> -->
     <el-row :gutter="20">
-      <el-col :span="2">
+      <el-col :span="3">
         <el-tag class="target-label" color="#36c6d3">主题</el-tag>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="18">
         <el-input v-model="mail.title" placeholder="请输入主题"></el-input>
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :span="20">
+      <el-col :span="19">
         <el-upload
           class="upload-file"
           :before-upload="handleBefore"
@@ -78,7 +78,7 @@
         </el-upload>
         <ul v-show="!!mail.oldFileList.length" class="old-file-list"></ul>
       </el-col>
-      <el-col :span="4" >
+      <el-col :span="3" >
         <el-button type="primary" @click="sendSubmit">发送</el-button>
         <!-- <el-button type="primary" @click="saveAsDraft">保存</el-button> -->
       </el-col>
@@ -288,6 +288,9 @@ export default {
         uuid: fileInfo.uid,
         url: fileInfo.url
       });
+      // this.mail.title = _findLastPint(fileInfo.name);
+      var str = fileInfo.name
+      this.mail.title = str.substr(0, str.lastIndexOf('.'));
     },
     handlePreview(file) {
       // 预览,一些文件因为格式问题无法预览。推荐使用a标签，src为文件的下载地址，点击即可下载,参照录音
