@@ -49,14 +49,14 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown> -->
-      <el-dropdown split-button type="primary" size="small" menu-align="start">附件
+      <!-- <el-dropdown split-button type="primary" size="small" menu-align="start">附件
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="file in mail.oldFileList" :key="file.name">
             <icon-svg icon-class="download3" class="download-icon"/>
             <a :href="file.url" download>{{file.name}}</a>
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
       <!-- <el-dropdown split-button type="primary" size="small" menu-align="start">录音
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="audio in mail.oldAudioList" :key="audio.name">
@@ -116,6 +116,16 @@
         </el-col>
       </el-row> -->
     </div>
+    <el-row>
+      <el-dropdown split-button  type="primary" size="large" menu-align="start">下载传输文件
+        <el-dropdown-menu slot="dropdown" style="color: #FFDEAD">
+          <el-dropdown-item v-for="file in mail.oldFileList" :key="file.name">
+            <icon-svg icon-class="download3" class="download-icon"/>
+            <a :href="file.url" download>{{file.name}}</a>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </el-row>
     <div class="mail-content" v-html="mail.content"></div>
   </div>
 </template>
