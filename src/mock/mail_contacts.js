@@ -2,45 +2,45 @@ import Mock from 'mockjs';
 import { param2Obj } from 'utils';
 
 let list = [];
-const count = 100;
+const count = 5;
 
-for (let i = 0; i < count - 5; i++) {
-    list.push(Mock.mock({
-        id: '@increment',
-        name: '@cname',
-        mail: '@email("abc.com")',
-        avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
-    }));
-}
+// for (let i = 0; i < count - 5; i++) {
+//     list.push(Mock.mock({
+//         id: '@increment',
+//         name: '@cname',
+//         mail: '@email("abc.com")',
+//         avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
+//     }));
+// }
 list = list.concat([
     {
-        id: '-1',
-        name: '曾艳芬',
-        mail: 'zengyanfen@snh48.com',
+        id: '1',
+        name: '国税局',
+        mail: '10.90.20.40:80',
         avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
     },
     {
-        id: '-2',
-        name: '鞠婧祎',
-        mail: 'jujingyi@snh48.com',
+        id: '2',
+        name: '住建局',
+        mail: '10.90.10.11:80',
         avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
     },
     {
-        id: '-2',
-        name: '黄婷婷',
-        mail: 'huangtingting@snh48.com',
+        id: '3',
+        name: '交通局',
+        mail: '10.90.17.22:80',
         avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
     },
     {
-        id: '-3',
-        name: '冯薪朵',
-        mail: 'fengxinduo@snh48.com',
+        id: '4',
+        name: '工商局',
+        mail: '10.90.16.25:80',
         avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
     },
     {
-        id: '-4',
-        name: '陆婷',
-        mail: 'luting@snh48.com',
+        id: '5',
+        name: '教育局',
+        mail: '10.90.15.24:80',
         avatarUrl: 'http://or7rpa0sk.bkt.clouddn.com/avatar.jpg'
     }
 ]);

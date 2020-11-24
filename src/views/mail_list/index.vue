@@ -8,7 +8,7 @@
         type="primary"
         class="tool-item filter-item btn-add"
       >
-        <icon-svg icon-class="undo"/>
+        <icon-svg icon-class="undo" />
       </el-button>
       <el-button
         v-waves
@@ -30,11 +30,11 @@
         class="tool-item filter-item btn-reload"
         v-on:click="getList"
       >
-        <icon-svg icon-class="reload4"/>
+        <icon-svg icon-class="reload4" />
       </el-button>
       <el-input
         @keyup.enter.native="handleFilter"
-        style="width: 200px;"
+        style="width: 200px"
         class="filter-item"
         placeholder="标题"
         v-model="listQuery.title"
@@ -61,8 +61,21 @@
         align="right"
         class="tool-item filter-item"
       ></el-date-picker>
-      <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
-      <el-button class="filter-item" type="text" icon="document" @click="handleDownload">导出</el-button>
+      <el-button
+        class="filter-item"
+        type="primary"
+        v-waves
+        icon="search"
+        @click="handleFilter"
+        >搜索</el-button
+      >
+      <el-button
+        class="filter-item"
+        type="text"
+        icon="document"
+        @click="handleDownload"
+        >导出</el-button
+      >
     </div>
     <el-table
       :data="list"
@@ -79,34 +92,59 @@
         <template scope="scope">
           <icon-svg
             @click.native="toggleStar(scope.row)"
-            :icon-class="scope.row.isStar? 'favourite':'favourite-o'"
+            :icon-class="scope.row.isStar ? 'favourite' : 'favourite-o'"
             class="star"
           />
-          <icon-svg v-if="scope.row.isHaveFile" icon-class="label4" class="file"/>
-          <icon-svg v-if="scope.row.isHaveAudio" icon-class="voice4"/>
+          <icon-svg
+            v-if="scope.row.isHaveFile"
+            icon-class="label4"
+            class="file"
+          />
+          <icon-svg v-if="scope.row.isHaveAudio" icon-class="voice4" />
         </template>
       </el-table-column>
       <el-table-column class="status-col" label="类型" width="90px">
         <template scope="scope">
-          <el-tag :type="scope.row.type | typeFilter">{{scope.row.type | typeShowFilter}}</el-tag>
+          <el-tag :type="scope.row.type | typeFilter">{{
+            scope.row.type | typeShowFilter
+          }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="发件人">
+      <el-table-column align="center" label="发送单位">
         <template scope="scope">
-          <el-tooltip class="item" effect="dark" :content="scope.row.sendMail" placement="top">
-            <span>{{scope.row.sendName}}</span>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            :content="scope.row.sendMail"
+            placement="top"
+          >
+            <span>{{ scope.row.sendName }}</span>
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column label="主题" :show-overflow-tooltip="true" min-width="500px">
+      <el-table-column
+        label="主题"
+        :show-overflow-tooltip="true"
+        min-width="500px"
+      >
         <template scope="scope">
-          <span class="link-type" @click="goToDetail(scope.row)">{{scope.row.title}}</span>
-          <el-tag v-for="label in scope.row.labelList" :key="label.guid">{{label.name}}</el-tag>
+          <span class="link-type" @click="goToDetail(scope.row)">{{
+            scope.row.title
+          }}</span>
+          <el-tag v-for="label in scope.row.labelList" :key="label.guid">{{
+            label.name
+          }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="date" sortable="custom" align="center" label="时间" width="200px">
+      <el-table-column
+        prop="date"
+        sortable="custom"
+        align="center"
+        label="时间"
+        width="200px"
+      >
         <template scope="scope">
-          <span>{{scope.row.date | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
+          <span>{{ scope.row.date | parseTime("{y}-{m}-{d} {h}:{i}") }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -115,7 +153,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="listQuery.page"
-        :page-sizes="[10,20,30, 50]"
+        :page-sizes="[10, 20, 30, 50]"
         :page-size="listQuery.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -125,11 +163,11 @@
 </template>
 
 <script>
-import * as mailListAPI from 'api/mail_list';
-import { parseTime } from 'utils';
+import * as mailListAPI from "api/mail_list";
+import { parseTime } from "utils";
 
 export default {
-  name: 'mail_list',
+  name: "mail_list",
   data() {
     return {
       list: [],
@@ -138,79 +176,79 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        title: '',
-        type: '',
+        title: "",
+        type: "",
         startDate: null,
         stopDate: null,
-        sort: '',
-        order: '',
-        routeQuery: {}
+        sort: "",
+        order: "",
+        routeQuery: {},
       },
       dateRange: [],
       multipleSelection: [],
       typeOptions: [
         {
-          value: 'receive',
-          showValue: '收件'
+          value: "receive",
+          showValue: "收件",
         },
         {
-          value: 'send',
-          showValue: '发件'
-        }
+          value: "send",
+          showValue: "发件",
+        },
       ],
       dateOptions: {
         shortcuts: [
           {
-            text: '最近一周',
+            text: "最近一周",
             onClick(picker) {
               const end = new Date();
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
+              picker.$emit("pick", [start, end]);
+            },
           },
           {
-            text: '最近一个月',
+            text: "最近一个月",
             onClick(picker) {
               const end = new Date();
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
+              picker.$emit("pick", [start, end]);
+            },
           },
           {
-            text: '最近三个月',
+            text: "最近三个月",
             onClick(picker) {
               const end = new Date();
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }
-        ]
+              picker.$emit("pick", [start, end]);
+            },
+          },
+        ],
       },
-      searchType: null
+      searchType: null,
     };
   },
   created() {
-    this.searchType = this.$route.params.labelId ? 'labelId' : 'deleted';
+    this.searchType = this.$route.params.labelId ? "labelId" : "deleted";
     this.getList();
   },
   filters: {
     typeFilter(type) {
       const typeMap = {
-        receive: 'primary',
-        send: 'success'
+        receive: "primary",
+        send: "success",
       };
       return typeMap[type];
     },
     typeShowFilter(type) {
       const typeShowMap = {
-        receive: '收件',
-        send: '发件'
+        receive: "收件",
+        send: "发件",
       };
       return typeShowMap[type];
-    }
+    },
   },
   methods: {
     getList() {
@@ -225,15 +263,15 @@ export default {
         this.$route.params,
         this.$route.meta
       );
-      mailListAPI.fetchList(this.listQuery).then(res => {
+      mailListAPI.fetchList(this.listQuery).then((res) => {
         this.list = res.data.items;
         this.total = res.data.total;
       });
     },
     goToDetail(row) {
-      this.$store.commit('SET_MAIL_ID', row.id);
-      this.$store.commit('SET_MAIL_TYPE', row.type);
-      this.$router.push({ path: '/mail_detail/index' });
+      this.$store.commit("SET_MAIL_ID", row.id);
+      this.$store.commit("SET_MAIL_TYPE", row.type);
+      this.$router.push({ path: "/mail_detail/index" });
     },
     handleFilter() {
       this.getList();
@@ -254,13 +292,13 @@ export default {
     forward() {
       const selectedLen = this.multipleSelection.length || 0;
       if (selectedLen !== 1) {
-        this.$message('请选择一封邮件进行转发');
+        this.$message("请选择一封邮件进行转发");
         return;
       }
-      this.$store.commit('SET_MAIL_ID', this.multipleSelection[0].id);
-      this.$store.commit('SET_PAGE_TYPE', 'forward');
-      this.$store.commit('SET_MAIL_TYPE', this.multipleSelection[0].type);
-      this.$router.push({ path: '/mail_send/index' });
+      this.$store.commit("SET_MAIL_ID", this.multipleSelection[0].id);
+      this.$store.commit("SET_PAGE_TYPE", "forward");
+      this.$store.commit("SET_MAIL_TYPE", this.multipleSelection[0].type);
+      this.$router.push({ path: "/mail_send/index" });
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
@@ -268,90 +306,90 @@ export default {
     handleDelete() {
       const selectedLen = this.multipleSelection.length || 0;
       if (selectedLen < 1) {
-        this.$message('请选择邮件进行删除');
+        this.$message("请选择邮件进行删除");
         return;
       }
-      this.$confirm('是否删除这' + selectedLen + '封邮件?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否删除这" + selectedLen + "封邮件?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
           const idArr = [];
-          this.multipleSelection.forEach(item => idArr.push(item.id));
+          this.multipleSelection.forEach((item) => idArr.push(item.id));
           // 删除的时候业务可能要求带上类型，类型在multipleSelection.type
           mailListAPI.delMail(idArr).subscribe({
             next: () => {
               this.$message({
-                message: '删除成功',
-                type: 'success',
-                duration: 2000
+                message: "删除成功",
+                type: "success",
+                duration: 2000,
               });
               this.getList();
             },
             error: () =>
               this.$message({
                 showClose: true,
-                message: '删除失败',
-                type: 'error'
-              })
+                message: "删除失败",
+                type: "error",
+              }),
           });
         })
         .catch(() => {
-          this.$message('操作已取消');
+          this.$message("操作已取消");
         });
     },
     unDeleted() {
       const selectedLen = this.multipleSelection.length || 0;
       if (selectedLen < 1) {
-        this.$message('请选择邮件撤销删除');
+        this.$message("请选择邮件撤销删除");
         return;
       }
       const idArr = [];
-      this.multipleSelection.forEach(item => idArr.push(item.id));
+      this.multipleSelection.forEach((item) => idArr.push(item.id));
       // 业务可能要求带上类型，类型在multipleSelection.type
       mailListAPI.unDoDelMail(idArr).subscribe({
         next: () => {
           this.$message({
-            message: '撤销删除成功',
-            type: 'success',
-            duration: 2000
+            message: "撤销删除成功",
+            type: "success",
+            duration: 2000,
           });
           this.getList();
         },
         error: () =>
           this.$message({
             showClose: true,
-            message: '撤销删除失败',
-            type: 'error'
-          })
+            message: "撤销删除失败",
+            type: "error",
+          }),
       });
     },
     handleDownload() {
       require.ensure([], () => {
-        const { export_json_to_excel } = require('vendor/Export2Excel');
-        const tHeader = ['发件人', '发件邮箱', '主题', '时间'];
-        const filterVal = ['sendName', 'sendMail', 'title', 'date'];
+        const { export_json_to_excel } = require("vendor/Export2Excel");
+        const tHeader = ["发件人", "发件邮箱", "主题", "时间"];
+        const filterVal = ["sendName", "sendMail", "title", "date"];
         const data = this.formatJson(filterVal, this.list);
         export_json_to_excel(
           tHeader,
           data,
-          parseTime(Date.now()) + '邮件列表数据'
+          parseTime(Date.now()) + "邮件列表数据"
         );
       });
     },
     formatJson(filterVal, jsonData) {
-      return jsonData.map(v =>
-        filterVal.map(j => {
-          if (~j.indexOf('date')) {
+      return jsonData.map((v) =>
+        filterVal.map((j) => {
+          if (~j.indexOf("date")) {
             return parseTime(v[j]);
           } else {
             return v[j];
           }
         })
       );
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
