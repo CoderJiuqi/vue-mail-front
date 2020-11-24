@@ -69,7 +69,7 @@
         @keyup.enter.native="handleFilter"
         style="width: 150px"
         class="filter-item"
-        placeholder="收件人"
+        placeholder="接收单位"
         v-model="listQuery.receiveName"
       >
       </el-input>
@@ -77,7 +77,7 @@
         @keyup.enter.native="handleFilter"
         style="width: 150px"
         class="filter-item"
-        placeholder="收件邮箱"
+        placeholder="接收单位地址"
         v-model="listQuery.receiveMail"
       >
       </el-input>
