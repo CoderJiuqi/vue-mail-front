@@ -176,17 +176,6 @@ export const asyncRouterMap = [
     //     children: [{ path: 'mail_label/index', component: MailLabel, name: '标签管理' }]
     // },
     // {
-    //     path: '',
-    //     component: Layout,
-    //     redirect: 'noredirect',
-    //     name: '通讯录',
-    //     icon: 'contact5',
-    //     children: [
-    //         { path: 'mail_contacts/group', component: MailGroup, name: '分组管理' },
-    //         { path: 'mail_contacts/index', component: ContactList, name: '所有联系人' }
-    //     ]
-    // },
-    // {
     //     path: '/errorpage',
     //     component: Layout,
     //     redirect: 'noredirect',
@@ -207,7 +196,17 @@ export const asyncRouterMap = [
     //     noDropdown: true,
     //     children: [{ path: 'log', component: ErrorLog, name: '错误日志' }]
     // },
-    // { path: '*', redirect: '/404', hidden: true }
+    // { path: '*', redirect: '/404', hidden: true },
+    {
+        path: '/mail_contacts',
+        component: Layout,
+        redirect: '/mail_contacts/index',
+        icon: 'contact5',
+        noDropdown: true,
+        children: [
+            { path: 'mail_contacts/index', component: ContactList, name: '地址薄' }
+        ]
+    }
 
 ];
 
@@ -228,15 +227,15 @@ labelAPI.fetchList().then(res => {
 
 groupAPI.fetchList().then(res => {
     const groupList = res.data.groupList;
-    const groupMenuIndex = asyncRouterMap.findIndex(item => item.name === '通讯录');
-    groupList.forEach(item => {
-        asyncRouterMap[groupMenuIndex].children.push({
-            path: 'mail_contacts/index/' + item.id,
-            component: ContactList,
-            name: item.name,
-            meta: {
-                groupId: item.id
-            }
-        })
-    });
+    const groupMenuIndex = asyncRouterMap.findIndex(item => item.name === '地址薄');
+    // groupList.forEach(item => {
+    //     asyncRouterMap[groupMenuIndex].children.push({
+    //         path: 'mail_contacts/index/' + item.id,
+    //         component: ContactList,
+    //         name: item.name,
+    //         meta: {
+    //             groupId: item.id
+    //         }
+    //     })
+    // });
 })

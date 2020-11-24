@@ -24,7 +24,7 @@
         <el-button type="danger" @click="cleanTarget">清空</el-button>
       </el-col>
     </el-row>
-    <el-row :gutter="10">
+    <!-- <el-row :gutter="10">
       <el-col :span="2">
         <el-tag class="target-label" color="#36c6d3">抄送
           <icon-svg icon-class="add-user4" class="add-user"/>
@@ -47,7 +47,7 @@
       <el-col :span="2">
         <el-button type="danger" @click="cleanCopy">清空</el-button>
       </el-col>
-    </el-row>
+    </el-row> -->
     <el-row :gutter="20">
       <el-col :span="2">
         <el-tag class="target-label" color="#36c6d3">主题</el-tag>
@@ -57,7 +57,7 @@
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :span="12">
+      <el-col :span="20">
         <el-upload
           class="upload-file"
           :before-upload="handleBefore"
@@ -78,7 +78,11 @@
         </el-upload>
         <ul v-show="!!mail.oldFileList.length" class="old-file-list"></ul>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="4" >
+        <el-button type="primary" @click="sendSubmit">发送</el-button>
+        <!-- <el-button type="primary" @click="saveAsDraft">保存</el-button> -->
+      </el-col>
+      <!-- <el-col :span="12">
         <el-button type="primary" :disabled="isRecording" @click="startRecorder" size="small">开始录音</el-button>
         <el-button type="primary" :disabled="!isRecording" @click="stopRecorder" size="small">结束录音</el-button>
         <ul v-show="!!mail.oldAudioList.length" class="old-audio-list">
@@ -95,17 +99,17 @@
             <icon-svg icon-class="delete11" class="del-audio" @click.native="delAudio(index)"/>
           </li>
         </ul>
-      </el-col>
+      </el-col> -->
     </el-row>
-    <div class="editor-container">
+    <!-- <div class="editor-container">
       <Tinymce :id="editorId" :height="editorHeight" ref="editor" v-model="mail.content"></Tinymce>
-    </div>
-    <el-row>
+    </div> -->
+    <!-- <el-row>
       <el-col :span="12" :offset="9">
         <el-button type="primary" @click="sendSubmit">发送</el-button>
         <el-button type="primary" @click="saveAsDraft">保存</el-button>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 
