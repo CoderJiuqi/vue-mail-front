@@ -1,7 +1,7 @@
 import Mock, { Random } from 'mockjs';
 import { param2Obj } from 'utils';
 
-const list = [];
+var list = [];
 const count = 5;
 var ii = -1
 Random.extend({
@@ -78,5 +78,16 @@ export default {
             total: mockList.length,
             items: mockList
         }
+    },
+
+    deleteItem: config => {
+        var { idArr } = param2Obj(config.url);
+        idArr = idArr.split(',')
+        for(var j = 0; j < idArr.length; j++){
+            var i;
+            for(i = 0; i < list.length && String(list[i].id) != idArr[j]; i++);
+            console.log('i', i);
+            list.splice(i, 1);
+        };
     }
 };

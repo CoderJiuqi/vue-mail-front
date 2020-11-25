@@ -79,5 +79,15 @@ export default {
             total: mockList.length,
             items: pageList
         }
+    },
+
+    deleteItem: config => {
+        var { idArr } = param2Obj(config.url);
+        idArr = idArr.split(',')
+        for(var j = 0; j < idArr.length; j++){
+            var i;
+            for(i = 0; i < list.length && String(list[i].id) != idArr[j]; i++);
+            list.splice(i, 1);
+        };
     }
 };

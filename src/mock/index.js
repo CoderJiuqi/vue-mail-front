@@ -16,12 +16,15 @@ Mock.mock(/\/user\/info\.*/, 'get', loginAPI.getInfo)
 
 // 邮件相关
 Mock.mock(/\/inbox\/list/, 'get', inboxAPI.getList);
+Mock.mock(/\/inbox\/list/, 'delete', inboxAPI.deleteItem);
 Mock.mock(/\/outbox\/list/, 'get', outboxAPI.getList);
+Mock.mock(/\/outbox\/list/, 'delete', outboxAPI.deleteItem);
 Mock.mock(/\/draftbox\/list/, 'get', draftboxAPI.getList);
 Mock.mock(/\/contacts\/list/, 'get', contactsAPI.getList);
 Mock.mock(/\/mail_detail/, 'get', mailDetailAPI.getDetail);
 Mock.mock(/\/mail_label\/list/, 'get', mailLabelAPI.getList);
 Mock.mock(/\/mail_list/, 'get', mailListAPI.getList);
+Mock.mock(/\/mail_list/, 'delete', mailListAPI.deleteItem);
 Mock.mock(/\/mail_group\/list/, 'get', groupAPI.getList);
 Mock.mock(/\/mail_contacts\/list/, 'get', contactsAPI.getList);
 

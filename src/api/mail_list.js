@@ -12,6 +12,12 @@ export function fetchList(query) {
 export function delMail(idArr) {
     const idStr = String(idArr);
     console.log('要删除的邮件id:' + idStr);
+    fetch({
+        url: '/mail_list',
+        method: 'delete',
+        params: {idArr : idArr.join(',')} 
+    });
+
     return Observable.create(observer => {
         setTimeout(() => { observer.next(true); }, 500);
     });
