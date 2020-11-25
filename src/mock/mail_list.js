@@ -32,23 +32,10 @@ for (let i = 0; i < count; i++) {
         'isStar|1': true,
         'isHaveFile|1': true,
         'isHaveAudio|1': true,
-        'type|1': ['receive', 'send'],
+        'type|1': ['receive'],
         sendName: '@ADDRESS_NAME',
         sendMail: '@IP_ADDRESS',
-        labelList: [
-            {
-                guid: '1',
-                name: '标签1'
-            },
-            {
-                guid: '2',
-                name: '标签2'
-            },
-            {
-                guid: '3',
-                name: '标签3'
-            }
-        ],
+        labelList: [],
         title: '@CONSTELLATION',
         date: +Mock.Random.date('T')
     }));
