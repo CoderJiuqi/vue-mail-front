@@ -61,26 +61,37 @@
         @keyup.enter.native="handleFilter"
         style="width: 300px"
         class="filter-item"
-        placeholder="标题"
-        v-model="listQuery.title"
+        placeholder="接口类型"
+        v-model="listQuery.inType"
       >
       </el-input>
 
-      <el-select
-        clearable
-        style="width: 120px"
+      <el-input
+        @keyup.enter.native="handleFilter"
+        style="width: 300px"
         class="filter-item"
-        v-model="listQuery.status"
-        placeholder="状态"
+        placeholder="接口名称"
+        v-model="listQuery.name"
       >
-        <el-option
-          v-for="status in statusOptions"
-          :key="status.value"
-          :label="status.showValue"
-          :value="status.value"
-        >
-        </el-option>
-      </el-select>
+      </el-input>
+
+      <el-input
+        @keyup.enter.native="handleFilter"
+        style="width: 300px"
+        class="filter-item"
+        placeholder="返回参数"
+        v-model="listQuery.return_params"
+      >
+      </el-input>
+
+      <el-input
+        @keyup.enter.native="handleFilter"
+        style="width: 300px"
+        class="filter-item"
+        placeholder="接口简介"
+        v-model="listQuery.type"
+      >
+      </el-input>
 
       <el-button
         class="filter-item"
@@ -89,13 +100,6 @@
         icon="search"
         @click="handleFilter"
         >搜索</el-button
-      >
-      <el-button
-        class="filter-item"
-        type="text"
-        icon="document"
-        @click="handleDownload"
-        >导出</el-button
       >
     </div>
 
@@ -202,6 +206,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
+
         title: undefined,
         status: undefined,
         sort: "",
@@ -209,21 +214,43 @@ export default {
       },
       statusOptions: [
         {
-          value: 0,
-          showValue: "未接收",
+          value: "POST",
+          showValue: "POST"
         },
         {
-          value: 1,
-          showValue: "已接收",
+          value: "GET",
+          showValue: "GET"
         },
         {
-          value: 2,
-          showValue: "已回复",
+          value: "",
+          showValue: "空"
+        }
+      ],
+      typeOptions: [
+        {
+          value: "推送文件",
+          showValue: "推送文件",
         },
         {
-          value: 3,
-          showValue: "已接收",
+          value: "读取文件",
+          showValue: "读取文件",
         },
+        {
+          value: "写入文件",
+          showValue: "写入文件",
+        },
+        {
+          value: "拉取文件",
+          showValue: "拉取文件",
+        },
+        {
+          value: "检查状态",
+          showValue: "检查状态",
+        },
+        {
+          value: "",
+          showValue: "空",
+        }
       ],
       multipleSelection: [],
       tableKey: 0,
@@ -261,6 +288,7 @@ export default {
     getList() {
       this.listLoading = true;
       inboxAPI.fetchList(this.listQuery).then((response) => {
+        console.log(this.listQuery)
         this.list = response.data.items;
         this.total = response.data.total;
         this.listLoading = false;

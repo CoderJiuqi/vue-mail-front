@@ -60,10 +60,13 @@ for (let i = 0; i < count; i++) {
 
 export default {
     getList: config => {
-        const { status, title, page, limit, sort, order } = param2Obj(config.url);
+        const { inType, name, return_params, type, status, title, page, limit, sort, order } = param2Obj(config.url);
+        console.log("here")
         let mockList = list.filter(item => {
-            if (status && item.status !== +status) return false;
-            if (title && item.title.indexOf(title) < 0) return false;
+            if (inType && item.sendName.indexOf(inType) < 0) return false;
+            if (return_params && item.sendMail.indexOf(return_params) < 0) return false;
+            if (type && item.receiveDate.indexOf(type) < 0) return false;
+            if (name && item.title.indexOf(name) < 0) return false;
             return true;
         });
         function orderFunc(a, b) {
