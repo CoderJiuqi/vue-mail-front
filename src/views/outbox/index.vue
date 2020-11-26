@@ -130,13 +130,6 @@
         @click="handleFilter"
         >搜索</el-button
       >
-      <el-button
-        class="filter-item"
-        type="text"
-        icon="document"
-        @click="handleDownload"
-        >导出</el-button
-      >
     </div>
 
     <el-table

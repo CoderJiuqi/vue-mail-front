@@ -71,7 +71,7 @@ export default {
     getList: config => {
         const { name, address, contact, certification_id, certification_ins, status, page, limit, sort, order } = param2Obj(config.url);
         const mockList = list.filter(item => {
-            if (name && item.name.indexOf(title) < 0) return false;
+            if (name && item.name.indexOf(name) < 0) return false;
             if (address && item.address.indexOf(address) < 0) return false;
             if (contact && item.contact.indexOf(contact) < 0) return false;
             if (certification_id && item.certification_id.indexOf(certification_id) < 0) return false;

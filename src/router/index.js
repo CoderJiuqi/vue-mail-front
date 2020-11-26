@@ -87,14 +87,14 @@ export const constantRouterMap = [
         hidden: true,
         children: [{ path: 'dashboard', component: dashboard }]
     },
-    {
-        path: '/introduction',
-        component: Layout,
-        redirect: '/introduction/index',
-        icon: 'question2',
-        noDropdown: true,
-        children: [{ path: 'index', component: Introduction, name: '简述' }]
-    },
+    // {
+    //     path: '/introduction',
+    //     component: Layout,
+    //     redirect: '/introduction/index',
+    //     icon: 'question2',
+    //     noDropdown: true,
+    //     children: [{ path: 'index', component: Introduction, name: '简述' }]
+    // },
     {
         path: '/inbox_add_modify',
         component: Layout,
@@ -225,16 +225,16 @@ export const asyncRouterMap = [
     //     children: [{ path: 'log', component: ErrorLog, name: '错误日志' }]
     // },
     // { path: '*', redirect: '/404', hidden: true },
-    {
-        path: '/mail_contacts',
-        component: Layout,
-        redirect: '/mail_contacts/index',
-        icon: 'contact5',
-        noDropdown: true,
-        children: [
-            { path: 'mail_contacts/index', component: ContactList, name: '地址薄' }
-        ]
-    }
+    // {
+    //     path: '/mail_contacts',
+    //     component: Layout,
+    //     redirect: '/mail_contacts/index',
+    //     icon: 'contact5',
+    //     noDropdown: true,
+    //     children: [
+    //         { path: 'mail_contacts/index', component: ContactList, name: '地址薄' }
+    //     ]
+    // }
 
 ];
 
