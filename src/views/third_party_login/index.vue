@@ -10,31 +10,44 @@
       class="card-box login-form"
     >
       <h3 class="title">第三方应用证书认证</h3>
-      <el-form-item prop="email">
+      <el-form-item prop="email1">
         <el-input
-          name="email"
+          name="email1"
           type="text"
-          v-model="loginForm.email"
+          v-model="loginForm.email1"
           placeholder="请输入单位名称"
         ></el-input>
       </el-form-item>
-      <el-form-item prop="email">
+      <el-form-item prop="email2">
         <el-input
-          name="email"
+          name="email2"
           type="text"
-          v-model="loginForm.email"
+          v-model="loginForm.email2"
           placeholder="请输入第三方应用名称"
         ></el-input>
       </el-form-item>
-      <el-form-item prop="email">
+      <el-form-item prop="email3">
         <el-input
-          name="email"
+          name="email3"
           type="text"
-          v-model="loginForm.email"
+          v-model="loginForm.email3"
           placeholder="请输入认证证书名称"
         ></el-input>
       </el-form-item>
-
+      <el-steps
+        :active="active"
+        process-status="error"
+        finish-status="success"
+        align-center="true"
+      >
+        <el-step title="已有信息，未插入key"></el-step>
+        <el-step title="已检测到相应key"></el-step>
+      </el-steps>
+      <el-button
+        style="margin-top: 12px; text-align: center; margin-bottom: 20px"
+        @click="next"
+        >检测</el-button
+      >
       <el-form-item>
         <el-button
           type="primary"
@@ -42,7 +55,7 @@
           :loading="loading"
           @click.native.prevent="handleLogin"
         >
-          提交
+          提交认证
         </el-button>
       </el-form-item>
     </el-form>
@@ -59,30 +72,14 @@ export default {
   components: { socialSign },
   name: "login",
   data() {
-    const validateEmail = (rule, value, callback) => {
-      if (!isEmail(value)) {
-        callback(new Error(""));
-      } else {
-        callback();
-      }
-    };
-    const validatePass = (rule, value, callback) => {
-      if (value.length < 6) {
-      } else {
-        callback();
-      }
-    };
     return {
       loginForm: {
-        email: "",
+        email1: "",
+        email2: "",
+        email3: "",
         password: "",
       },
-      loginRules: {
-        email: [{ required: true, trigger: "blur", validator: validateEmail }],
-        password: [
-          { required: true, trigger: "blur", validator: validatePass },
-        ],
-      },
+      active: 1,
       loading: false,
       showDialog: false,
     };
@@ -91,26 +88,15 @@ export default {
     ...mapGetters(["auth_type"]),
   },
   methods: {
+    next() {
+      if (this.active++ > 1) this.active = 0;
+    },
     handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.loading = true;
-          this.$store
-            .dispatch("LoginByEmail", this.loginForm)
-            .then(() => {
-              this.loading = false;
-              this.$router.push({ path: "/" });
-              // this.showDialog = true;
-            })
-            .catch((err) => {
-              this.$message.error(err);
-              this.loading = false;
-            });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+      this.$message("你的认证请求正在被处理，请稍候");
+      setTimeout(function () {
+        alert("你的证书认证结果： 有效");
+        location.reload();
+      }, 3000);
     },
     afterQRScan() {
       // const hash = window.location.hash.slice(1);
