@@ -50,6 +50,8 @@ const MailLabel = () =>
     import('../views/mail_label/index');
 const MailList = () =>
     import('../views/mail_list/index');
+const AuditLog = () =>
+    import('../views/auditlog/index');
 const MailGroup = () =>
     import('../views/mail_contacts/group');
 const ContactList = () =>
@@ -133,12 +135,12 @@ export const constantRouterMap = [
     //     children: [{ path: 'index', component: DraftBox, name: '草稿箱' }]
     // },
     {
-        path: '/mail_list',
+        path: '/auditlog',
         component: Layout,
-        redirect: '/mail_list/index',
+        redirect: '/auditlog/index',
         icon: 'recycle3',
         noDropdown: true,
-        children: [{ path: 'index', component: MailList, name: '审计日志', meta: { isDeleted: true } }]
+        children: [{ path: 'index', component: AuditLog, name: '审计日志', meta: { isDeleted: true } }]
     },
     {   
         path: '/certification_detail', 
