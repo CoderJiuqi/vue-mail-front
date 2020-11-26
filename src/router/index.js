@@ -36,6 +36,8 @@ const Inbox = () =>
     import('../views/inbox/index');
 const Inbox_Add = () =>
     import('../views/inbox_add_modify/index');
+const Third_login = () =>
+    import('../views/third_party_login/index');
 const Outbox = () =>
     import('../views/outbox/index');
 const DraftBox = () =>
@@ -99,6 +101,11 @@ export const constantRouterMap = [
         noDropdown: true,
         hidden: true,
         children: [{ path: 'index/:mailId?', component: Inbox_Add, name: '修改新增接口' }]
+    },
+    {
+        path: '/third_party_login',
+        component: Third_login,
+        hidden: true
     },
     // {
     //     path: '/mail_send',
