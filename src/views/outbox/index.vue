@@ -1,7 +1,22 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
+
       <el-button
+        v-waves
+        type="success"
+        class="filter-item"
+        @click="handleAgree"
+      >通过</el-button>
+
+      <el-button
+        v-waves
+        type="danger"
+        class="filter-item"
+        @click="handleReject"
+      >驳回</el-button>
+
+      <!-- <el-button
         v-waves
         type="primary"
         icon="edit"
@@ -29,7 +44,7 @@
         v-on:click="initPage"
       >
         <icon-svg icon-class="reload4" />
-      </el-button>
+      </el-button> -->
 
       <!-- <el-dropdown
         @command="handleMark"
@@ -59,28 +74,53 @@
       </el-dropdown> -->
       <el-input
         @keyup.enter.native="handleFilter"
-        style="width: 300px"
+        style="width: 240px"
         class="filter-item"
-        placeholder="标题"
-        v-model="listQuery.title"
+        placeholder="认证机构名称"
+        v-model="listQuery.name"
+      >
+      </el-input>
+      <el-input
+        @keyup.enter.native="handleFilter"
+        style="width: 250px"
+        class="filter-item"
+        placeholder="机构地址"
+        v-model="listQuery.address"
+      >
+      </el-input>
+      <el-input
+        @keyup.enter.native="handleFilter"
+        style="width: 80px"
+        class="filter-item"
+        placeholder="联系人"
+        v-model="listQuery.contact"
       >
       </el-input>
       <el-input
         @keyup.enter.native="handleFilter"
         style="width: 150px"
         class="filter-item"
-        placeholder="接收单位"
-        v-model="listQuery.receiveName"
+        placeholder="证书号"
+        v-model="listQuery.certification_id"
       >
       </el-input>
       <el-input
         @keyup.enter.native="handleFilter"
-        style="width: 150px"
+        style="width: 200px"
         class="filter-item"
-        placeholder="接收单位地址"
-        v-model="listQuery.receiveMail"
+        placeholder="资质认定部门"
+        v-model="listQuery.certification_ins"
       >
       </el-input>
+      <el-input
+        @keyup.enter.native="handleFilter"
+        style="width: 80px"
+        class="filter-item"
+        placeholder="证书状态"
+        v-model="listQuery.status"
+      >
+      </el-input>
+
 
       <el-button
         class="filter-item"
@@ -112,7 +152,7 @@
     >
       <el-table-column type="selection" min-width="30px"> </el-table-column>
 
-      <el-table-column align="left" width="90px" label="信息">
+      <!-- <el-table-column align="left" width="110px" label="信息">
         <template scope="scope">
           <icon-svg
             @click.native="toggleStar(scope.row)"
@@ -126,20 +166,95 @@
           />
           <icon-svg v-if="scope.row.isHaveAudio" icon-class="voice4" />
         </template>
-      </el-table-column>
+      </el-table-column> -->
 
       <el-table-column
-        align="center"
-        label="接收单位"
-        width="120px"
-        :show-overflow-tooltip="true"
+        align="left"
+        label="认证机构名称"
+        min-width="100px"
       >
         <template scope="scope">
-          <span>{{ scope.row.receiveList | showReceiveName }}</span>
+          <span>{{ scope.row.name}}</span>
         </template>
       </el-table-column>
 
       <el-table-column
+        align="left"
+        label="机构地址"
+        min-width="160px"
+      >
+        <template scope="scope">
+          <span>{{ scope.row.address}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        label="联系人"
+        min-width="50px"
+        :show-overflow-tooltip="true"
+      >
+        <template scope="scope">
+          <span>{{ scope.row.contact}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        label="证书号"
+        min-width="80px"
+        :show-overflow-tooltip="true"
+      >
+        <template scope="scope">
+          <span>{{ scope.row.certification_id}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="left"
+        label="资质认定部门"
+        min-width="80px"
+      >
+        <template scope="scope">
+          <span>{{ scope.row.certification_ins}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        label="证书状态"
+        width="100px"
+        :show-overflow-tooltip="true"
+      >
+        <template scope="scope">
+          <span>{{ scope.row.status}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        label="有效截止日期"
+        width="150px"
+        :show-overflow-tooltip="true"
+      >
+        <template scope="scope">
+          <span>{{ scope.row.date| parseTime("{y}-{m}-{d} {h}:{i}")}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        label="操作"
+        width="70px"
+        :show-overflow-tooltip="true"
+      >
+        <template scope="scope">
+          <span class="link-type" @click="goToDetail(scope.row.certification_id, scope.row.date)">{{
+            scope.row.operate
+          }}</span>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column
         prop="title"
         sortable="custom"
         label="主题"
@@ -153,10 +268,10 @@
           <!-- <el-tag v-for="label in scope.row.labelList" :key="label.guid">{{
             label.name
           }}</el-tag> -->
-        </template>
-      </el-table-column>
+        <!-- </template>
+      </el-table-column> --> -->
 
-      <el-table-column
+      <!-- <el-table-column
         prop="sendDate"
         sortable="custom"
         align="center"
@@ -168,7 +283,7 @@
             scope.row.sendDate | parseTime("{y}-{m}-{d} {h}:{i}")
           }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <div v-show="!listLoading" class="pagination-container">
@@ -266,10 +381,11 @@ export default {
       this.listQuery.start = parseInt(+time[0] / 1000);
       this.listQuery.end = parseInt((+time[1] + 3600 * 1000 * 24) / 1000);
     },
-    goToDetail(id) {
-      this.$store.commit("SET_MAIL_ID", id);
-      this.$store.commit("SET_MAIL_TYPE", "send");
-      this.$router.push({ path: "/mail_detail/index" });
+    goToDetail(id, date) {
+      console.log(id);
+      this.$store.commit("SET_DATE", date);
+      this.$store.commit("SET_CERTIFICATIONID", id);
+      this.$router.push({ path: "/certification_detail/index" });
     },
     edit() {
       const selectedLen = this.multipleSelection.length || 0;
@@ -282,27 +398,17 @@ export default {
       this.$store.commit("SET_MAIL_TYPE", "send");
       this.$router.push({ path: "/mail_send/index" });
     },
-    forward() {
+    handleAgree() {
       const selectedLen = this.multipleSelection.length || 0;
-      if (selectedLen !== 1) {
-        this.$message("请选择一封邮件进行转发");
+      if (selectedLen == 0) {
+        this.$message("请选择认证申请");
         return;
       }
-      this.$store.commit("SET_MAIL_ID", this.multipleSelection[0].id);
-      this.$store.commit("SET_PAGE_TYPE", "forward");
-      this.$store.commit("SET_MAIL_TYPE", "send");
-      this.$router.push({ path: "/mail_send/index" });
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    handleDelete() {
-      const selectedLen = this.multipleSelection.length || 0;
-      if (selectedLen < 1) {
-        this.$message("请选择邮件进行删除");
-        return;
-      }
-      this.$confirm("是否删除这" + selectedLen + "封邮件?", "提示", {
+      // this.$store.commit("SET_MAIL_ID", this.multipleSelection[0].id);
+      // this.$store.commit("SET_PAGE_TYPE", "forward");
+      // this.$store.commit("SET_MAIL_TYPE", "send");
+      // this.$router.push({ path: "/mail_send/index" });
+      this.$confirm("是否通过这" + selectedLen + "条申请?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
@@ -313,7 +419,7 @@ export default {
           outboxAPI.delSendMail(idArr).subscribe({
             next: () => {
               this.$message({
-                message: "删除成功",
+                message: "审核通过",
                 type: "success",
                 duration: 2000,
               });
@@ -322,7 +428,50 @@ export default {
             error: () =>
               this.$message({
                 showClose: true,
-                message: "删除失败",
+                message: "审核失败,请稍后再试",
+                type: "error",
+              }),
+          });
+        })
+        .catch(() => {
+          this.$message("操作已取消");
+        });
+
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    handleReject() {
+      const selectedLen = this.multipleSelection.length || 0;
+      if (selectedLen == 0) {
+        this.$message("请选择认证申请");
+        return;
+      }
+      // this.$store.commit("SET_MAIL_ID", this.multipleSelection[0].id);
+      // this.$store.commit("SET_PAGE_TYPE", "forward");
+      // this.$store.commit("SET_MAIL_TYPE", "send");
+      // this.$router.push({ path: "/mail_send/index" });
+      this.$confirm("是否驳回这" + selectedLen + "条申请?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          const idArr = [];
+          this.multipleSelection.forEach((item) => idArr.push(item.id));
+          outboxAPI.delSendMail(idArr).subscribe({
+            next: () => {
+              this.$message({
+                message: "审核驳回",
+                type: "warning",
+                duration: 2000,
+              });
+              this.getList();
+            },
+            error: () =>
+              this.$message({
+                showClose: true,
+                message: "审核失败,请稍后再试",
                 type: "error",
               }),
           });

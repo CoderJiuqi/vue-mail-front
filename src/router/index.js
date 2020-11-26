@@ -42,6 +42,8 @@ const MailSend = () =>
     import('../views/mail_send/index');
 const MailDetail = () =>
     import('../views/mail_detail/index');
+const CertificationDetail = () =>
+    import('../views/certification_detail/index');
 const MailLabel = () =>
     import('../views/mail_label/index');
 const MailList = () =>
@@ -109,7 +111,7 @@ export const constantRouterMap = [
         redirect: '/outbox/index',
         icon: 'outbox',
         noDropdown: true,
-        children: [{ path: 'index', component: Outbox, name: '交换箱' }]
+        children: [{ path: 'index', component: Outbox, name: '认证系统审核' }]
     },
     // {
     //     path: '/draftbox',
@@ -127,8 +129,14 @@ export const constantRouterMap = [
         noDropdown: true,
         children: [{ path: 'index', component: MailList, name: '回收站', meta: { isDeleted: true } }]
     },
-    {
-        path: '/mail_detail',
+    {   
+        path: '/certification_detail', 
+        component: Layout,
+        redirect: '/certification_detail/index',
+        hidden: true,
+        children: [{ path: 'index/:certificationId?', component: CertificationDetail, name: '认证详情' }]
+    },
+    {   path: '/mail_detail', 
         component: Layout,
         redirect: '/mail_detail/index',
         hidden: true,

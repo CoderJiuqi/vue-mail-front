@@ -8,6 +8,7 @@ import mailLabelAPI from './mail_label';
 import mailListAPI from './mail_list';
 import groupAPI from './mail_group';
 import contactsAPI from './mail_contacts';
+import certifacation_detailAPI from './certification_detail'
 
 // 登录相关
 Mock.mock(/\/login\/loginbyemail/, 'post', loginAPI.loginByEmail);
@@ -27,5 +28,6 @@ Mock.mock(/\/mail_list/, 'get', mailListAPI.getList);
 Mock.mock(/\/mail_list/, 'delete', mailListAPI.deleteItem);
 Mock.mock(/\/mail_group\/list/, 'get', groupAPI.getList);
 Mock.mock(/\/mail_contacts\/list/, 'get', contactsAPI.getList);
+Mock.mock(/\/certification_detail/, 'get', certifacation_detailAPI.getDetail)
 
 export default Mock;

@@ -17,6 +17,8 @@ const getters = {
     draftId: state => state.mail.draftId,
     pageType: state => state.mail.pageType,
     mailType: state => state.mail.mailType,
-    target: state => state.mail.target
+    target: state => state.mail.target,
+    certificationId: state => state.mail.certificationId,
+    date: state => state.mail.date
 };
 export default getters

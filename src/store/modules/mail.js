@@ -2,6 +2,8 @@
 
 const mail = {
     state: {
+        certificationId: '',
+        date: '',
         mailId: '',
         draftId: '',
         pageType: '',
@@ -11,6 +13,12 @@ const mail = {
     mutations: {
         SET_MAIL_ID: (state, mailId) => {
             state.mailId = mailId;
+        },
+        SET_CERTIFICATIONID: (state, id) => {
+            state.certificationId = id;
+        },
+        SET_DATE: (state, date) => {
+            state.date = date;
         },
         SET_DRAFT_ID: (state, draftId) => {
             state.draftId = draftId;

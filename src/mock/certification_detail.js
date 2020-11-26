@@ -21,6 +21,31 @@ Random.extend({
         return contacts[ii];
     },
 
+    phone: function(date) {
+        var phones = ['010-67867683', '010-67564986', '010-68612354', '010-67856748', '010-67864235',];
+        return phones[ii];
+    },
+
+    fax_num: function(date) {
+        var fax_nums = ['010-67546237', '010-67778767', '010-67845678', '010-6987678', '010-67829348',];
+        return fax_nums [ii];
+    },
+
+    mail_num: function(date) {
+        var mail_nums = ['100176', '100382', '100787', '038200', '037659',];
+        return mail_nums[ii];
+    },
+
+    industry: function(date) {
+        var industries = ['医疗器械', '环境与环保', '电子信息', '环境与环保', '综合'];
+        return industries[ii];
+    },
+    
+    email: function(date) {
+        var emails = ['ycszjzx103@163.com', 'fasdfasfd@102.com', 'msyhzhaoxu@163.com', 'jichuzhongxin@126.com', 'kjhjkh34@qq.com'];
+        return emails[ii];
+    },
+
     certification_id: function(date) {
         var certification_ids = ['170000303965', '200012194409', '170008113960', '200010264408', '160001081466'];
         return certification_ids[ii];
@@ -49,6 +74,11 @@ Random.certification_id();
 Random.certification_ins();
 Random.status();
 Random.operate();
+Random.phone();
+Random.fax_num();
+Random.mail_num();
+Random.industry();
+Random.email();
 
 for (let i = 0; i < count; i++) {
     list.push(Mock.mock({
@@ -63,46 +93,26 @@ for (let i = 0; i < count; i++) {
         certification_ins: "@CERTIFICATION_INS",
         status: "@STATUS",
         operate: "@OPERATE",
+        phone: "@PHONE",
+        fax_num: "@FAX_NUM",
+        mail_num: "@MAIL_NUM",
+        industry: "@INDUSTRY",
+        email: "@EMAIL",
         date: +Mock.Random.date('T')
     }));
 }
 
 export default {
-    getList: config => {
-        const { name, address, contact, certification_id, certification_ins, status, page, limit, sort, order } = param2Obj(config.url);
-        const mockList = list.filter(item => {
-            if (name && item.name.indexOf(title) < 0) return false;
-            if (address && item.address.indexOf(address) < 0) return false;
-            if (contact && item.contact.indexOf(contact) < 0) return false;
-            if (certification_id && item.certification_id.indexOf(certification_id) < 0) return false;
-            if (certification_ins && item.certification_ins.indexOf(certification_ins) < 0) return false;
-            if (status && item.status.indexOf(status) < 0) return false;
-            // if (receiveName && item.receiveList.every(receive => receive.name.indexOf(receiveName) < 0)) return false;
-            // if (receiveMail && item.receiveList.every(receive => receive.mail.indexOf(receiveMail) < 0)) return false;
+    getDetail: config => {
+        const { certificationId } = param2Obj(config.url);
+        let mockList = list.filter(item => {
+            if (certificationId && item.certification_id.indexOf(certificationId) < 0) return false;
             return true;
         });
-        function orderFunc(a, b) {
-            if (order === 'ascending') {
-                return a[sort] - b[sort];
-            } else {
-                return b[sort] - a[sort];
-            }
-        }
-        sort && mockList.sort(orderFunc);
-        const pageList = mockList.filter((item, index) => index < limit * page && index >= limit * (page - 1));
+        console.log(mockList[0]);
         return {
-            total: mockList.length,
-            items: pageList
+            detail: mockList[0]
         }
     },
 
-    deleteItem: config => {
-        var { idArr } = param2Obj(config.url);
-        idArr = idArr.split(',')
-        for(var j = 0; j < idArr.length; j++){
-            var i;
-            for(i = 0; i < list.length && String(list[i].id) != idArr[j]; i++);
-            list.splice(i, 1);
-        };
-    }
 };
