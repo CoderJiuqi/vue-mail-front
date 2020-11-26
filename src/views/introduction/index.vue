@@ -3,7 +3,7 @@
     <div class="wrapper">
       <el-row>
         <el-col :span="12" :offset="6">
-          <p>这是一个基于Vue的业务信息交换系统</p>
+          <p>这是一个基于Vue的电子文件共享支撑平台</p>
         </el-col>
       </el-row>
       <el-row>

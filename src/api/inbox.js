@@ -31,3 +31,19 @@ export function delReceiveMail(idArr) {
         setTimeout(() => { observer.next(true); }, 1000);
     });
 }
+
+export function modify(idArr, input_name, input_type, return_para, input_para, textarea){
+    const data = {
+        idArr,
+        input_name,
+        input_type,
+        return_para,
+        input_para,
+        textarea
+    }
+    return fetch({
+        url: '/inbox/list',
+        method: 'modify',
+        data
+      });
+}

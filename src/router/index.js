@@ -34,6 +34,8 @@ const ErrorLog = () =>
 // mail page
 const Inbox = () =>
     import('../views/inbox/index');
+const Inbox_Add = () =>
+    import('../views/inbox_add_modify/index');
 const Outbox = () =>
     import('../views/outbox/index');
 const DraftBox = () =>
@@ -90,20 +92,29 @@ export const constantRouterMap = [
         children: [{ path: 'index', component: Introduction, name: '简述' }]
     },
     {
-        path: '/mail_send',
+        path: '/inbox_add_modify',
         component: Layout,
-        redirect: '/mail_send/index',
-        icon: 'edit2',
+        redirect: '/inbox_add_modify/index',
+        icon: 'question2',
         noDropdown: true,
-        children: [{ path: 'index', component: MailSend, name: '交换文件' }]
+        hidden: true,
+        children: [{ path: 'index/:mailId?', component: Inbox_Add, name: '修改新增接口' }]
     },
+    // {
+    //     path: '/mail_send',
+    //     component: Layout,
+    //     redirect: '/mail_send/index',
+    //     icon: 'edit2',
+    //     noDropdown: true,
+    //     children: [{ path: 'index', component: MailSend, name: '交换文件' }]
+    // },
     {
         path: '/inbox',
         component: Layout,
         redirect: '/inbox/index',
         icon: 'inbox',
         noDropdown: true,
-        children: [{ path: 'index', component: Inbox, name: '收件箱' }]
+        children: [{ path: 'index', component: Inbox, name: '接口管理' }]
     },
     {
         path: '/outbox',
@@ -127,7 +138,7 @@ export const constantRouterMap = [
         redirect: '/mail_list/index',
         icon: 'recycle3',
         noDropdown: true,
-        children: [{ path: 'index', component: MailList, name: '回收站', meta: { isDeleted: true } }]
+        children: [{ path: 'index', component: MailList, name: '审计日志', meta: { isDeleted: true } }]
     },
     {   
         path: '/certification_detail', 

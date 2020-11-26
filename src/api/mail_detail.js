@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Observable';
 
 export function fetchDetail(query) {
     return fetch({
-        url: 'mail_detail',
-        method: 'get',
+        url: '/inbox/list',
+        method: 'getone',
         params: query
     })
 }
