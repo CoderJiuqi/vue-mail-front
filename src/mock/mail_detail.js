@@ -142,12 +142,10 @@ function mockDraft(mailId) {
 export default {
     getDetail: query => {
         const { mailId, mailType } = param2Obj(query.url);
-        if (mailType === 'receive') {
+        if (mailId<5) {
             return mockReceiveMail(mailId);
-        } else if (mailType === 'send') {
+        } else{
             return mockSendMail(mailId);
-        } else {
-            return mockDraft(mailId);
         }
     }
 }

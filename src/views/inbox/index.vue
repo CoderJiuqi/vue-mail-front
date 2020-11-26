@@ -3,34 +3,25 @@
     <div class="filter-container">
       <el-button
         v-waves
-        @click="reply()"
-        type="primary"
-        class="tool-item filter-item btn-reply"
-      >
-        <icon-svg icon-class="reply" />
-      </el-button>
-      <el-button
-        v-waves
-        @click="reply(true)"
-        type="primary"
-        class="tool-item filter-item btn-reply-all"
-      >
-        <icon-svg icon-class="reply-all" />
-      </el-button>
-      <el-button
-        v-waves
-        @click="forward"
-        type="primary"
-        icon="share"
-        class="tool-item filter-item btn-forward"
-      ></el-button>
-      <el-button
-        v-waves
         type="danger"
         icon="delete"
         class="tool-item filter-item btn-del"
         v-on:click="handleDelete()"
       ></el-button>
+      <el-button
+        v-waves
+        type="primary"
+        class="tool-item filter-item btn-reply-all"
+        v-on:click="handleModify()"
+        >修改</el-button
+      >
+      <el-button
+        v-waves
+        type="primary"
+        class="tool-item filter-item btn-reply-all"
+        v-on:click="handleAdd()"
+        >新增</el-button
+      >
       <el-button
         v-waves
         type="primary"
@@ -121,41 +112,11 @@
     >
       <el-table-column type="selection" min-width="30px"> </el-table-column>
 
-      <el-table-column align="left" width="90px" label="信息">
-        <template scope="scope">
-          <icon-svg
-            @click.native="toggleStar(scope.row)"
-            :icon-class="scope.row.isStar ? 'favourite' : 'favourite-o'"
-            class="star"
-          />
-          <icon-svg
-            v-if="scope.row.isHaveFile"
-            icon-class="label4"
-            class="file"
-          />
-          <icon-svg v-if="scope.row.isHaveAudio" icon-class="voice4" />
-        </template>
-      </el-table-column>
-
-      <el-table-column
-        prop="status"
-        sortable="custom"
-        class-name="status-col"
-        label="状态"
-        width="80px"
-      >
-        <template scope="scope">
-          <el-tag :type="scope.row.status | statusTypeFilter">{{
-            scope.row.status | statusShowFilter
-          }}</el-tag>
-        </template>
-      </el-table-column>
-
       <el-table-column
         prop="sendName"
         sortable="custom"
         align="center"
-        label="发送单位"
+        label="接口类型"
       >
         <template scope="scope">
           <el-tooltip
@@ -172,7 +133,7 @@
       <el-table-column
         prop="title"
         sortable="custom"
-        label="主题"
+        label="接口名称"
         :show-overflow-tooltip="true"
         min-width="400px"
       >
@@ -190,13 +151,11 @@
         prop="receiveDate"
         sortable="custom"
         align="center"
-        label="送达时间"
+        label="返回参数"
         width="150px"
       >
         <template scope="scope">
-          <span>{{
-            scope.row.receiveDate | parseTime("{y}-{m}-{d} {h}:{i}")
-          }}</span>
+          <span>{{ scope.row.target[0].mail }}</span>
         </template>
       </el-table-column>
 
@@ -204,13 +163,11 @@
         prop="readDate"
         sortable="custom"
         align="center"
-        label="接收时间"
+        label="接口简介"
         width="150px"
       >
         <template scope="scope">
-          <span>{{
-            scope.row.readDate | parseTime("{y}-{m}-{d} {h}:{i}")
-          }}</span>
+          <span>{{ scope.row.receiveDate }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -342,7 +299,7 @@ export default {
     goToDetail(id) {
       this.$store.commit("SET_MAIL_ID", id);
       this.$store.commit("SET_MAIL_TYPE", "receive");
-      this.$router.push({ path: "/mail_detail/index" });
+      this.$router.push({ path: "/inbox_add_modify/index" });
     },
     reply(isALL) {
       const selectedLen = this.multipleSelection.length || 0;
@@ -407,6 +364,14 @@ export default {
         .catch(() => {
           this.$message("操作已取消");
         });
+    },
+    handleModify() {
+      this.$store.commit("SET_MAIL_ID", this.multipleSelection[0].id);
+      this.$router.push({ path: "/inbox_add_modify/index" });
+    },
+    handleAdd() {
+      this.$store.commit("SET_MAIL_ID", -1);
+      this.$router.push({ path: "/inbox_add_modify/index" });
     },
     handleDownload() {
       require.ensure([], () => {

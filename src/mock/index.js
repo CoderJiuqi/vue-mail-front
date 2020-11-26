@@ -17,6 +17,8 @@ Mock.mock(/\/user\/info\.*/, 'get', loginAPI.getInfo)
 // 邮件相关
 Mock.mock(/\/inbox\/list/, 'get', inboxAPI.getList);
 Mock.mock(/\/inbox\/list/, 'delete', inboxAPI.deleteItem);
+Mock.mock(/\/inbox\/list/,'modify',inboxAPI.modify);
+Mock.mock(/\/inbox\/list/,'getone',inboxAPI.getOne);
 Mock.mock(/\/outbox\/list/, 'get', outboxAPI.getList);
 Mock.mock(/\/outbox\/list/, 'delete', outboxAPI.deleteItem);
 Mock.mock(/\/draftbox\/list/, 'get', draftboxAPI.getList);
