@@ -5,26 +5,7 @@
         你的权限:
         <span class="pan-info-roles" v-for="item in roles">{{ item }}</span>
       </PanThumb>
-      <a
-        href="https://github.com/weihomechen/vue-mail-front"
-        target="_blank"
-        class="github-corner"
-        aria-label="View source on Github"
-      >
-        <svg
-          width="80"
-          height="80"
-          viewBox="0 0 250 250"
-          style="
-            fill: #4ab7bd;
-            color: #fff;
-            position: absolute;
-            top: 50px;
-            border: 0;
-            right: 0;
-          "
-          aria-hidden="true"
-        >
+        
           <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
           <path
             d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
@@ -40,80 +21,8 @@
         </svg>
       </a>
       <div class="info-container">
-        <span class="display_name">{{ name }}</span>
-        <div class="info-wrapper">
-          <div class="info-item">
-            <countTo
-              class="info-item-num"
-              :startVal="0"
-              :endVal="statisticsData.inbox_count"
-              :duration="3400"
-            ></countTo>
-            <span class="info-item-text">收件</span>
-            <icon-svg icon-class="a" class="dashboard-icon" />
-          </div>
-          <div class="info-item" style="cursor: auto">
-            <countTo
-              class="info-item-num"
-              :startVal="0"
-              :endVal="statisticsData.outbox_count"
-              :duration="3600"
-            ></countTo>
-            <span class="info-item-text">发件</span>
-            <icon-svg icon-class="b" class="dashboard-icon" />
-          </div>
-          <div class="info-item">
-            <countTo
-              class="info-item-num"
-              ref="countTo3"
-              :startVal="0"
-              :endVal="statisticsData.draft_count"
-              :duration="3800"
-            ></countTo>
-            <span class="info-item-text">草稿</span>
-            <icon-svg icon-class="c" class="dashboard-icon" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="btn-group">
-      <router-link class="pan-btn green-btn" to="/mail_send/index"
-        >交换文件</router-link
-      >
-      <router-link class="pan-btn orange-btn" to="/inbox/index"
-        >收件箱</router-link
-      >
-      <router-link class="pan-btn blue-btn" to="/outbox/index"
-        >交换箱</router-link
-      >
-      <router-link class="pan-btn red-btn" to="/mail_contacts/index"
-        >地址薄</router-link
-      >
-    </div>
-
-    <div class="clearfix main-dashboard-container">
-      <div class="chart-container">
-        <WeeklyUsing :listData="statisticsData.weekly_using"></WeeklyUsing>
-      </div>
-      <div class="unread-mail-container">
-        <div class="unread-mail-title">未读交换信息</div>
-        <div class="unread-mail-wrapper">
-          <template v-if="unreadMails.length != 0">
-            <div class="unread-mail-item" v-for="mail in unreadMails">
-              <span class="unread-mail-content" @click="toUnreadMail(mail.id)">
-                {{ mail.title }}
-              </span>
-              <el-tag type="danger">{{
-                mail.receiveDate | parseTime("{m}-{d} {h}:{i}")
-              }}</el-tag>
-              <el-tag type="primary">{{ mail.sendName }}</el-tag>
-            </div>
-          </template>
-          <template v-else>
-            <div class="unread-mail-emptyTitle">所有邮件都被你读过了</div>
-          </template>
-        </div>
+        <span class="display_name">欢迎来到电子文件共享支撑平台</span>
+        <div class="info-wrapper"></div>
       </div>
     </div>
   </div>

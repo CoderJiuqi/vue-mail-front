@@ -7,7 +7,7 @@ const userMap = {
     introduction: '我是超级管理员',
     // avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     avatar: 'http://or7rpa0sk.bkt.clouddn.com/avatar3.gif',
-    name: '业务信息及文件交换系统',
+    name: '电子文件共享支撑平台',
     uid: '001'
   }
 }
