@@ -36,6 +36,8 @@ const Inbox = () =>
     import('../views/inbox/index');
 const Inbox_Add = () =>
     import('../views/inbox_add_modify/index');
+const Certicification_signup = () =>
+    import('../views/certicification_signup/index')
 const Third_login = () =>
     import('../views/third_party_login/index');
 const Outbox = () =>
@@ -107,6 +109,11 @@ export const constantRouterMap = [
     {
         path: '/third_party_login',
         component: Third_login,
+        hidden: true
+    },
+    {
+        path: '/certicification_signup',
+        component: Certicification_signup,
         hidden: true
     },
     // {
@@ -238,20 +245,20 @@ export const asyncRouterMap = [
 
 ];
 
-labelAPI.fetchList().then(res => {
-    const labelList = res.data.labelList;
-    const labelMenuIndex = asyncRouterMap.findIndex(item => item.name === '邮件标签');
-    labelList.forEach(item => {
-        asyncRouterMap[labelMenuIndex].children.push({
-            path: 'mail_list/index/' + item.id,
-            component: MailList,
-            name: item.name,
-            meta: {
-                labelId: item.id
-            }
-        })
-    });
-});
+// labelAPI.fetchList().then(res => {
+//     const labelList = res.data.labelList;
+//     const labelMenuIndex = asyncRouterMap.findIndex(item => item.name === '邮件标签');
+//     labelList.forEach(item => {
+//         asyncRouterMap[labelMenuIndex].children.push({
+//             path: 'mail_list/index/' + item.id,
+//             component: MailList,
+//             name: item.name,
+//             meta: {
+//                 labelId: item.id
+//             }
+//         })
+//     });
+// });
 
 groupAPI.fetchList().then(res => {
     const groupList = res.data.groupList;
