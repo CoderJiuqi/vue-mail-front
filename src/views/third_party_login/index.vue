@@ -44,10 +44,16 @@
         <el-step :title="title1" :status="status1"></el-step>
       </el-steps>
       <el-button
-        style="margin-top: 12px; text-align: center; margin-bottom: 20px"
+        style="
+          margin-top: 12px;
+          text-align: center;
+          margin-bottom: 20px;
+          background-color: unset;
+          border: none;
+          cursor: default;
+        "
         @click="next"
-        >检测</el-button
-      >
+      ></el-button>
       <el-form-item>
         <el-button
           type="primary"
@@ -98,11 +104,16 @@ export default {
       this.loginForm.email3 = "CA90248982374123";
     },
     handleLogin() {
-      this.$message("你的认证请求正在被处理，请稍候");
-      setTimeout(function () {
-        alert("你的证书认证结果： 有效，有效期至： 2021-10-21");
-        location.reload();
-      }, 3000);
+      this.$prompt("请输入key密码", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+      }).then(({ value }) => {
+        this.$message("你的认证请求正在被处理，请稍候");
+        setTimeout(function () {
+          alert("你的证书认证结果： 有效，有效期至： 2021-10-21");
+          location.reload();
+        }, 3000);
+      });
     },
     afterQRScan() {
       // const hash = window.location.hash.slice(1);
