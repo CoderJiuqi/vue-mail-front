@@ -15,7 +15,7 @@
           name="email1"
           type="text"
           v-model="loginForm.email1"
-          placeholder="请输入单位名称"
+          placeholder="单位名称"
         ></el-input>
       </el-form-item>
       <el-form-item prop="email2">
@@ -23,7 +23,7 @@
           name="email2"
           type="text"
           v-model="loginForm.email2"
-          placeholder="请输入第三方应用名称"
+          placeholder="第三方应用名称"
         ></el-input>
       </el-form-item>
       <el-form-item prop="email3">
@@ -31,17 +31,17 @@
           name="email3"
           type="text"
           v-model="loginForm.email3"
-          placeholder="请输入认证证书名称"
+          placeholder="认证证书编号"
         ></el-input>
       </el-form-item>
       <el-steps
         :active="active"
         process-status="error"
         finish-status="success"
-        align-center="true"
+        style="text-align: right"
+        simple="true"
       >
-        <el-step title="已有信息，未插入key"></el-step>
-        <el-step title="已检测到相应key"></el-step>
+        <el-step :title="title1" :status="status1"></el-step>
       </el-steps>
       <el-button
         style="margin-top: 12px; text-align: center; margin-bottom: 20px"
@@ -82,6 +82,8 @@ export default {
       active: 1,
       loading: false,
       showDialog: false,
+      status1: 1,
+      title1: "未检测到相关key",
     };
   },
   computed: {
@@ -89,12 +91,16 @@ export default {
   },
   methods: {
     next() {
-      if (this.active++ > 1) this.active = 0;
+      this.status1 = 0;
+      this.title1 = "已检测到key，成功获取信息";
+      this.loginForm.email1 = "住建局";
+      this.loginForm.email2 = "住建局OA";
+      this.loginForm.email3 = "CA90248982374123";
     },
     handleLogin() {
       this.$message("你的认证请求正在被处理，请稍候");
       setTimeout(function () {
-        alert("你的证书认证结果： 有效");
+        alert("你的证书认证结果： 有效，有效期至： 2021-10-21");
         location.reload();
       }, 3000);
     },
